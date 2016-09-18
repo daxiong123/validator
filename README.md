@@ -29,7 +29,7 @@ Validator works with PHP 5.6, 7.0, 7.1.
 ```php
 require __DIR__ . '/vendor/autoload.php';
 
-use \Aichong;
+use \Aichong\Validator;
 
 $curl = new Validator();
 $validator->validate(['test' => ''], ['test' => 'required'], ['test' => 'empty']);
