@@ -1,0 +1,30 @@
+{
+  "name": "5ichong/validator",
+  "description": "The data format validation.",
+  "keywords": [
+    "validator",
+    "validate",
+    "check"
+  ],
+  "type": "library",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Weijian Zhang",
+      "email": "zhangwj@5ichong.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Aichong\\": "src",
+      "Aichong\\tests\\": "tests"
+    }
+  },
+  "minimum-stability": "stable"
+}
