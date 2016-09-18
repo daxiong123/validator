@@ -1,10 +1,6 @@
 # Validator - The data format validation
-======================================================================
 
 [![Build Status](https://travis-ci.org/daxiong123/validator.svg?branch=master)](https://travis-ci.org/daxiong123/validator)
-[![Latest Stable Version](https://poser.pugx.org/blink/blink/v/stable)](https://packagist.org/packages/daxiong123/validator)
-[![Latest Unstable Version](https://poser.pugx.org/blink/blink/v/unstable)](https://packagist.org/packages/daxiong123/validator)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/daxiong123/validator/blob/master/LICENSE)
 
 ---
 
