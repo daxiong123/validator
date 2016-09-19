@@ -232,4 +232,17 @@ class Validator
         // 比较校验码
         return $verify_code == $verify_code_list[$mod] ? true : false;
     }
+
+    /**
+     * 验证JSON
+     *
+     * @param mixed $value
+     * @return bool
+     */
+    private function _json($value)
+    {
+        json_decode($value);
+
+        return json_last_error() === JSON_ERROR_NONE ? true : false;
+    }
 }

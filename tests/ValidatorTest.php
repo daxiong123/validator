@@ -86,4 +86,16 @@ class ValidatorTest extends TestCase
 
         $this->assertEquals($validator->message(), 'no_idcard');
     }
+
+    public function testJson()
+    {
+        $validator = new Validator();
+        $validator->validate(['test' => '123456789098765432'], ['test' => 'json'], ['test' => 'no_json']);
+
+        $this->assertEquals($validator->message(), 'no_json');
+
+        $ret = $validator->validate(['test' => '{"discount": "0.00"}'], ['test' => 'json'], ['test' => 'no_json']);
+
+        $this->assertTrue($ret);
+    }
 }
