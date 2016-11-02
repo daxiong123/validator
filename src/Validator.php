@@ -194,6 +194,17 @@ class Validator
     }
 
     /**
+     * 验证座机号码
+     *
+     * @param string $value
+     * @return bool
+     */
+    private function _tel($value)
+    {
+        return preg_match('#^([0-9]{3,4}-)?[0-9]{7,8}$#', $value) ? true : false;
+    }
+
+    /**
      * 验证身份证号码
      *
      * @param string $value
