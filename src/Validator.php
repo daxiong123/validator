@@ -190,7 +190,7 @@ class Validator
      */
     private function _phone($value)
     {
-        return preg_match('#(13\d|14[57]|15[^4,\D]|17[3678]|18\d)\d{8}|170[059]\d{7}#', $value) ? true : false;
+        return preg_match('#(13\d|14[57]|15[^4,\D]|17[03678]|18\d)\d{8}|170[059]\d{7}#', $value) ? true : false;
     }
 
     /**
