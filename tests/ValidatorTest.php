@@ -66,7 +66,7 @@ class ValidatorTest extends TestCase
     public function testPhone()
     {
         $validator = new Validator();
-        $ret = $validator->validate(['test' => '15821789646'], ['test' => 'phone'], ['test' => 'nophone']);
+        $ret = $validator->validate(['test' => '17071106666'], ['test' => 'phone'], ['test' => 'nophone']);
 
         $this->assertTrue($ret);
     }
