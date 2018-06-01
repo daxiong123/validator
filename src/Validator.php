@@ -133,7 +133,7 @@ class Validator
      */
     private function _min($value, $length)
     {
-        if (is_int($value)) {
+        if (is_numeric($value)) {
 
             return $value >= (int)$length ? true : false;
         } else {
@@ -151,7 +151,7 @@ class Validator
      */
     private function _max($value, $length)
     {
-        if (is_int($value)) {
+        if (is_numeric($value)) {
 
             return $value <= (int)$length ? true : false;
         } else {
