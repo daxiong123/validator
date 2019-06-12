@@ -7,6 +7,18 @@ use Aichong\Validator;
 class ValidatorTest extends TestCase
 {
 
+    /**
+     *
+     * @expectedException \Exception
+     *
+     * @return void
+     */
+    public function testException()
+    {
+        $validator = new Validator();
+        $validator->validate(['a' => ''], ['test' => 'required'], ['test' => 'empty']);
+    }
+
     public function testRequired()
     {
         $validator = new Validator();
@@ -69,15 +81,15 @@ class ValidatorTest extends TestCase
         $ret = $validator->validate(['test' => '17071106666'], ['test' => 'phone'], ['test' => 'nophone']);
 
         $this->assertTrue($ret);
-        
+
         $ret = $validator->validate(['test' => '17571106666'], ['test' => 'phone'], ['test' => 'nophone']);
 
         $this->assertTrue($ret);
-        
+
         $ret = $validator->validate(['test' => '19971106666'], ['test' => 'phone'], ['test' => 'nophone']);
 
         $this->assertTrue($ret);
-        
+
         $ret = $validator->validate(['test' => '16671106666'], ['test' => 'phone'], ['test' => 'nophone']);
 
         $this->assertTrue($ret);
@@ -95,8 +107,10 @@ class ValidatorTest extends TestCase
     {
         $validator = new Validator();
         $ret = $validator->validate(['test' => '192.168.1.1'], ['test' => 'ip'], ['test' => 'noip']);
+        $ret1 = $validator->validate(['test' => '2001:da8:8000:1::81'], ['test' => 'ip:ipv6'], ['test' => 'noip']);
 
         $this->assertTrue($ret);
+        $this->assertTrue($ret1);
     }
 
     public function testIdCard()

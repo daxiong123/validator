@@ -28,21 +28,21 @@ class Validator
     public function validate(array $data, array $rule, array $message)
     {
         foreach ($rule as $key => $val) {
-
             $temp = explode('|', $val);
             $params = $temp;
 
             foreach ($params as $value) {
-
                 if (!array_key_exists($key, $rule)) {
-
                     continue;
+                }
+
+                if (!isset($data[$key])) {
+                    throw new \Exception('missing parameter');
                 }
 
                 $args = [$data[$key]];
 
                 if (strpos($value, ':') !== false) {
-
                     $tmp = explode(':', $value);
 
                     $func = '_' . $tmp[0];
@@ -50,14 +50,12 @@ class Validator
 
                     unset($tmp);
                 } else {
-
                     $func = '_' . $value;
                 }
 
                 $ret = call_user_func_array([$this, $func], $args);
 
                 if ($ret === false) {
-
                     $this->message = vsprintf($message[$key], $args);
 
                     return false;
@@ -134,10 +132,8 @@ class Validator
     private function _min($value, $length)
     {
         if (is_numeric($value)) {
-
             return $value >= (int)$length ? true : false;
         } else {
-
             return strlen($value) >= (int)$length ? true : false;
         }
     }
@@ -152,10 +148,8 @@ class Validator
     private function _max($value, $length)
     {
         if (is_numeric($value)) {
-
             return $value <= (int)$length ? true : false;
         } else {
-
             return strlen($value) <= (int)$length ? true : false;
         }
     }
@@ -166,9 +160,10 @@ class Validator
      * @param string $value
      * @return bool
      */
-    private function _ip($value)
+    private function _ip($value, $type = 'ipv4')
     {
-        return filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false ? true : false;
+        $ipType = strtolower($type) !== 'ipv6' ? FILTER_FLAG_IPV4 : FILTER_FLAG_IPV6;
+        return filter_var($value, FILTER_VALIDATE_IP, $ipType) !== false ? true : false;
     }
 
     /**
@@ -214,34 +209,32 @@ class Validator
     {
         // 只能是18位
         if (strlen($value) != 18) {
-
             return false;
         }
 
         // 取出本体码
-        $idcard_base = substr($value, 0, 17);
+        $idCardBase = substr($value, 0, 17);
 
         // 取出校验码
-        $verify_code = substr($value, 17, 1);
+        $verifyCode = substr($value, 17, 1);
 
         // 加权因子
         $factor = array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
 
         // 校验码对应值
-        $verify_code_list = array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
+        $verifyCodeList = array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
 
         // 根据前17位计算校验码
         $total = 0;
         for ($i = 0; $i < 17; $i++) {
-
-            $total += substr($idcard_base, $i, 1) * $factor[$i];
+            $total += substr($idCardBase, $i, 1) * $factor[$i];
         }
 
         // 取模
         $mod = $total % 11;
 
         // 比较校验码
-        return $verify_code == $verify_code_list[$mod] ? true : false;
+        return $verifyCode == $verifyCodeList[$mod] ? true : false;
     }
 
     /**
